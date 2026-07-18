@@ -1,3 +1,4 @@
+import LoginButton from '@/components/login-btn'
 import Link from 'next/link'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { SubmitButton } from '@/components/submit-btn'
@@ -19,7 +20,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center bg-neutral-50 dark:bg-[#0a0a0a] overflow-hidden text-neutral-900 dark:text-neutral-100 font-sans px-4 py-12 transition-colors duration-150">
-
+      
       {/* Top right floating theme selector */}
       <div className="absolute top-4 right-4 z-20">
         <ThemeToggle />
@@ -27,7 +28,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
 
       {/* Main Login Card */}
       <div className="relative z-10 w-full max-w-md px-6 py-8 sm:px-8 bg-white dark:bg-[#0d0d0d] border border-neutral-200 dark:border-neutral-850 rounded-xl shadow-sm flex flex-col items-center">
-
+        
         {/* Brand Logo */}
         <div className="w-10 h-10 bg-neutral-950 dark:bg-white rounded-lg flex items-center justify-center shadow-sm mb-4 select-none">
           <span className="text-lg font-bold text-white dark:text-black">▲</span>
@@ -38,7 +39,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
           Access your Workspace
         </h1>
         <p className="text-xs text-neutral-500 dark:text-neutral-400 mb-6 text-center">
-          Sign in using your account credentials.
+          Sign in using your account credentials or single sign-on.
         </p>
 
         {/* Error Alert Box */}
@@ -88,9 +89,11 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
 
           {/* Password input */}
           <div className="space-y-1">
-            <label htmlFor="password" className="text-xs font-bold text-neutral-700 dark:text-neutral-300">
-              Password
-            </label>
+            <div className="flex justify-between items-center">
+              <label htmlFor="password" className="text-xs font-bold text-neutral-700 dark:text-neutral-300">
+                Password
+              </label>
+            </div>
             <input
               id="password"
               name="password"
@@ -105,6 +108,16 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
           <SubmitButton label="Sign In" pendingLabel="Signing in..." />
         </form>
 
+        {/* Divider */}
+        <div className="flex items-center my-5 w-full">
+          <div className="border-t border-neutral-200 dark:border-neutral-800 flex-grow" />
+          <span className="mx-3 text-[10px] font-bold text-neutral-400 uppercase tracking-widest">or</span>
+          <div className="border-t border-neutral-200 dark:border-neutral-800 flex-grow" />
+        </div>
+
+        {/* Google SSO */}
+        <LoginButton nextPath={next} className="w-full" />
+
         {/* Signup redirection link */}
         <div className="mt-6 text-center text-xs">
           <span className="text-neutral-500 dark:text-neutral-400">Don&apos;t have an account? </span>
@@ -116,7 +129,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
           </Link>
         </div>
 
-        {/* Back to home */}
+        {/* Back to guide */}
         <div className="mt-6 pt-5 border-t border-neutral-200 dark:border-neutral-800 w-full text-center">
           <Link
             href="/"
@@ -125,7 +138,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
             <svg className="w-3.5 h-3.5 transition-transform duration-150 group-hover:-translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
             </svg>
-            Back to Home
+            Back to User Setup Guide
           </Link>
         </div>
       </div>
