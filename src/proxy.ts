@@ -4,8 +4,8 @@ import type { NextRequest } from 'next/server'
 
 /**
  * Next.js 16 Request Interceptor (replaces deprecated middleware.ts).
- * This function intercepts requests to refresh the Supabase auth session and
- * enforces path-based authentication at the network edge.
+ * This function intercepts requests to refresh the Supabase auth session,
+ * enforces path-based authentication, and performs Role-Based Access Control (RBAC).
  */
 export async function proxy(request: NextRequest) {
   // Create an initial response
@@ -50,13 +50,23 @@ export async function proxy(request: NextRequest) {
   if (pathname.startsWith('/dashboard')) {
     if (!user) {
       const loginUrl = new URL('/auth/login', request.url)
-      // Pass the original destination path so login can return the user here
+      // Pass the original destination path as a redirect parameter
       loginUrl.searchParams.set('next', pathname)
       return NextResponse.redirect(loginUrl)
     }
+
+    // 1b. Role-Based Access Control: Protect admin routes
+    if (pathname.startsWith('/dashboard/admin')) {
+      const role = user.user_metadata?.role || 'user'
+      if (role !== 'admin') {
+        const redirectUrl = new URL('/dashboard', request.url)
+        redirectUrl.searchParams.set('error', 'Access denied: Admin credentials required')
+        return NextResponse.redirect(redirectUrl)
+      }
+    }
   }
 
-  // 2. Redirect authenticated users away from the login/signup pages to the dashboard
+  // 2. Redirect authenticated users away from the login/signup page to the dashboard
   if (pathname === '/auth/login' || pathname === '/auth/signup') {
     if (user) {
       return NextResponse.redirect(new URL('/dashboard', request.url))
