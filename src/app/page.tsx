@@ -1,65 +1,62 @@
 import Link from "next/link"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 /**
- * v1 — Bare boilerplate landing page.
- * A static Server Component. No auth, no theming, no database.
- * This is the `create-next-app` baseline the rest of the ladder builds on.
+ * v2 — Theming & UI shell.
+ * Adds a light/dark/system theme toggle (next-themes) and dark: variants throughout.
+ * Still fully static — no auth or database.
  */
 export default function Home() {
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center px-6 py-16 font-sans">
+    <main className="min-h-screen flex flex-col items-center justify-center px-6 py-16 font-sans bg-neutral-50 dark:bg-[#0a0a0a] text-neutral-900 dark:text-neutral-100 transition-colors duration-150">
       <div className="w-full max-w-2xl flex flex-col gap-8">
-        <div className="flex items-center gap-2">
-          <span className="text-xl font-bold tracking-tight select-none">▲ mahusay</span>
-          <span className="px-2 py-0.5 rounded text-[10px] font-medium bg-neutral-100 border border-neutral-200 text-neutral-600">
-            v1
-          </span>
-        </div>
+        <header className="flex items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <span className="text-xl font-bold tracking-tight text-black dark:text-white select-none">▲ mahusay</span>
+            <span className="px-2 py-0.5 rounded text-[10px] font-medium bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400">
+              v2
+            </span>
+          </div>
+          <ThemeToggle />
+        </header>
 
         <div className="space-y-3">
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
-            Next.js 16 Boilerplate
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-black dark:text-white">
+            Adaptive Theming
           </h1>
-          <p className="text-sm sm:text-base text-neutral-500 leading-relaxed">
-            The bare starting point of the mahusay scaffold ladder: Next.js 16 (App Router),
-            TypeScript, and Tailwind CSS v4. No authentication, theming, or database yet — those
-            arrive one tier at a time in v2 through v6.
+          <p className="text-sm sm:text-base text-neutral-500 dark:text-neutral-400 leading-relaxed">
+            v2 layers a class-based dark/light/system theme switcher over the v1 boilerplate using
+            <code className="mx-1 font-mono text-xs">next-themes</code> and Tailwind v4&apos;s
+            <code className="mx-1 font-mono text-xs">@custom-variant dark</code>. Try the toggle above —
+            the choice persists and respects your OS preference. No hydration flash.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
           {[
-            ["App Router", "React Server Components & the src/app directory"],
-            ["TypeScript", "Strict, path-aliased (@/*) configuration"],
-            ["Tailwind CSS v4", "Utility-first styling via @tailwindcss/postcss"],
-            ["ESLint", "eslint-config-next flat config"],
+            ["Light", "Forced light appearance"],
+            ["Dark", "Forced dark appearance"],
+            ["System", "Follows OS setting"],
           ].map(([title, desc]) => (
-            <div key={title} className="rounded-xl border border-neutral-200 p-4">
-              <div className="font-bold">{title}</div>
-              <div className="text-neutral-500 text-xs mt-1 leading-relaxed">{desc}</div>
+            <div key={title} className="rounded-xl border border-neutral-200 dark:border-neutral-800 p-4 bg-white dark:bg-[#0d0d0d]">
+              <div className="font-bold text-black dark:text-white">{title}</div>
+              <div className="text-neutral-500 dark:text-neutral-400 text-xs mt-1 leading-relaxed">{desc}</div>
             </div>
           ))}
         </div>
 
         <div className="flex flex-wrap gap-3 text-sm">
           <Link
-            href="https://nextjs.org/docs"
+            href="https://github.com/pacocoursey/next-themes"
             target="_blank"
-            className="px-4 py-2 rounded-lg bg-neutral-900 text-white font-medium hover:bg-neutral-800 transition-colors"
+            className="px-4 py-2 rounded-lg bg-neutral-900 dark:bg-white text-white dark:text-black font-medium hover:opacity-90 transition-opacity"
           >
-            Next.js Docs
-          </Link>
-          <Link
-            href="https://tailwindcss.com/docs"
-            target="_blank"
-            className="px-4 py-2 rounded-lg border border-neutral-200 font-medium hover:bg-neutral-50 transition-colors"
-          >
-            Tailwind Docs
+            next-themes
           </Link>
         </div>
 
-        <p className="text-xs text-neutral-400 border-t border-neutral-200 pt-6">
-          Next up — <strong>v2</strong>: adaptive dark/light/system theming.
+        <p className="text-xs text-neutral-400 dark:text-neutral-500 border-t border-neutral-200 dark:border-neutral-800 pt-6">
+          Next up — <strong>v3</strong>: Supabase email &amp; password authentication.
         </p>
       </div>
     </main>
