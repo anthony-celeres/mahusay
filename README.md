@@ -1,33 +1,58 @@
-# mahusay · v2 — Adaptive Theming
+# mahusay · v3 — Supabase Email &amp; Password Auth
 
-Adds a **dark / light / system** theme toggle on top of the v1 boilerplate.
-Still fully static — no authentication or database yet.
+Wires up **Supabase** authentication with cookie-based server-side sessions
+(`@supabase/ssr`). Users can register, sign in, sign out, and reach a
+page-guarded dashboard.
 
-## What this version adds (vs v1)
+## What this version adds (vs v2)
 
-- **`next-themes`** for class-based theme switching with no hydration flash
-- Tailwind v4 `@custom-variant dark (&:where(.dark, .dark *))` wiring
-- A reusable `ThemeProvider` and a `ThemeToggle` (light / dark / system)
-- `dark:` variants applied across the landing page
+- **`@supabase/ssr` + `@supabase/supabase-js`** clients (browser + server)
+- **Server Actions** for email/password login, signup, and signout
+- A **page-guarded** `/dashboard` that verifies the session with `getUser()`
+- A reusable `SubmitButton` (React 19 `useFormStatus`) and `LogoutButton`
+- A committed **`.env.example`** template
 
-## Getting started
+> Route protection here is **page-level only** (each Server Component checks the
+> session). v4 adds an earlier, edge-level guard via `proxy.ts`.
 
-```bash
-npm install
-npm run dev
-```
+## Setup
 
-Open [http://localhost:3000](http://localhost:3000) and try the toggle in the
-header — your choice persists and respects the OS setting.
+1. Create a project at the [Supabase Dashboard](https://supabase.com/dashboard)
+   and copy the **Project URL** and **anon public key** (Settings → API).
+2. Configure your environment:
 
-## New files (vs v1)
+   ```bash
+   cp .env.example .env.local
+   ```
+
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=https://<your-ref>.supabase.co
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=<your-anon-key>
+   NEXT_PUBLIC_SITE_URL=http://localhost:3000
+   ```
+
+3. Run it:
+
+   ```bash
+   npm install
+   npm run dev
+   ```
+
+## New files (vs v2)
 
 ```text
 src/
-├── app/layout.tsx           # now wraps children in <ThemeProvider>
-└── components/
-    ├── theme-provider.tsx    # next-themes context wrapper
-    └── theme-toggle.tsx      # light / dark / system selector
+├── app/auth/
+│   ├── actions.ts          # login / signup / signout Server Actions
+│   ├── login/page.tsx      # credentials login form
+│   └── signup/page.tsx     # registration form
+├── app/dashboard/page.tsx  # protected workspace (page-level guard)
+├── components/
+│   ├── submit-btn.tsx      # useFormStatus submit button
+│   └── logout-btn.tsx      # sign-out control
+└── utils/supabase/
+    ├── client.ts           # browser client
+    └── server.ts           # server client (async cookies)
 ```
 
 ## The version ladder
@@ -35,10 +60,10 @@ src/
 | Tag | Adds |
 |-----|------|
 | `v1` | Next.js 16 boilerplate |
-| **`v2`** | **Dark / light / system theming** ← you are here |
-| `v3` | Supabase email &amp; password auth |
+| `v2` | Dark / light / system theming |
+| **`v3`** | **Supabase email &amp; password auth** ← you are here |
 | `v4` | Edge route protection (`proxy.ts`) |
 | `v5` | Google OAuth (PKCE) |
 | `v6` | Role-Based Access Control (RBAC) + admin panel |
 
-> Next up — **v3**: Supabase email &amp; password authentication.
+> Next up — **v4**: edge-level route protection with `proxy.ts`.
