@@ -38,6 +38,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# local scaffold workflow tooling (runbook + generator, never committed)
+.scaffold/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
