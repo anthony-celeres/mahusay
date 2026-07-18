@@ -4,16 +4,16 @@ A production-ready, open-source project scaffold (boilerplate) for building full
 
 ## Version Ladder
 
-`mahusay` is a **progressive scaffold** — each tier adds one capability, available as a tag (`vN`) and a branch (`stage/vN`). Start from whichever layer fits your needs (`git checkout v3`). Full details in [VERSIONS.md](./VERSIONS.md).
+`mahusay` is a **progressive scaffold** — each tier adds one capability. Every tier is an immutable [semver](https://semver.org) tag where the **tier number is the major version** (`vN.0.0`), plus a rolling `stage/vN` branch. Fixes bump the patch (`v3.0.1`). Start from whichever layer fits your needs (`git checkout v3.0.0`). Full details in [VERSIONS.md](./VERSIONS.md).
 
 | Tier | Adds | New deps |
 |------|------|----------|
-| [`v1`](https://github.com/anthony-celeres/mahusay/tree/v1) | Next.js 16 boilerplate (App Router, TS, Tailwind v4) | `next`, `react`, `tailwindcss` |
-| [`v2`](https://github.com/anthony-celeres/mahusay/tree/v2) | Dark / light / system theming | `next-themes` |
-| [`v3`](https://github.com/anthony-celeres/mahusay/tree/v3) | Supabase email &amp; password auth | `@supabase/ssr`, `@supabase/supabase-js` |
-| [`v4`](https://github.com/anthony-celeres/mahusay/tree/v4) | Edge route protection (`proxy.ts`) | — |
-| [`v5`](https://github.com/anthony-celeres/mahusay/tree/v5) | Google OAuth (PKCE) | — |
-| **[`v6`](https://github.com/anthony-celeres/mahusay/tree/v6)** | **Role-Based Access Control + admin panel** *(= `main`)* | — |
+| [`v1.0.0`](https://github.com/anthony-celeres/mahusay/tree/v1.0.0) | Next.js 16 boilerplate (App Router, TS, Tailwind v4) | `next`, `react`, `tailwindcss` |
+| [`v2.0.0`](https://github.com/anthony-celeres/mahusay/tree/v2.0.0) | Dark / light / system theming | `next-themes` |
+| [`v3.0.0`](https://github.com/anthony-celeres/mahusay/tree/v3.0.0) | Supabase email &amp; password auth | `@supabase/ssr`, `@supabase/supabase-js` |
+| [`v4.0.0`](https://github.com/anthony-celeres/mahusay/tree/v4.0.0) | Edge route protection (`proxy.ts`) | — |
+| [`v5.0.0`](https://github.com/anthony-celeres/mahusay/tree/v5.0.0) | Google OAuth (PKCE) | — |
+| **[`v6.0.0`](https://github.com/anthony-celeres/mahusay/tree/v6.0.0)** | **Role-Based Access Control + admin panel** *(= `main`)* | — |
 
 ## Tech Stack Overview
 
