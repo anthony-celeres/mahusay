@@ -5,10 +5,13 @@ import { redirect } from 'next/navigation'
 
 /**
  * Server Action to log in with Email and Password.
+ * Honors a `next` destination so the proxy can deep-link users back to the
+ * protected page they originally requested.
  */
 export async function loginWithEmail(formData: FormData) {
   const email = formData.get('email') as string
   const password = formData.get('password') as string
+  const next = (formData.get('next') as string) || '/dashboard'
 
   if (!email || !password) {
     redirect(`/auth/login?error=${encodeURIComponent('Email and password are required')}`)
@@ -22,7 +25,7 @@ export async function loginWithEmail(formData: FormData) {
     redirect(`/auth/login?error=${encodeURIComponent(error.message)}`)
   }
 
-  redirect('/dashboard')
+  redirect(next)
 }
 
 /**

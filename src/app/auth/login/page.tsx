@@ -7,6 +7,7 @@ interface LoginPageProps {
   searchParams: Promise<{
     error?: string
     message?: string
+    next?: string
   }>
 }
 
@@ -14,6 +15,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
   const params = await searchParams
   const error = params.error
   const message = params.message
+  const next = params.next
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center bg-neutral-50 dark:bg-[#0a0a0a] overflow-hidden text-neutral-900 dark:text-neutral-100 font-sans px-4 py-12 transition-colors duration-150">
@@ -67,6 +69,8 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
 
         {/* Email & Password Login Form */}
         <form action={loginWithEmail} className="w-full space-y-4">
+          <input type="hidden" name="next" value={next || ''} />
+
           {/* Email input */}
           <div className="space-y-1">
             <label htmlFor="email" className="text-xs font-bold text-neutral-700 dark:text-neutral-300">
@@ -105,7 +109,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
         <div className="mt-6 text-center text-xs">
           <span className="text-neutral-500 dark:text-neutral-400">Don&apos;t have an account? </span>
           <Link
-            href="/auth/signup"
+            href={`/auth/signup${next ? `?next=${encodeURIComponent(next)}` : ''}`}
             className="font-bold text-neutral-900 hover:text-black dark:text-neutral-200 dark:hover:text-white underline transition-colors duration-150"
           >
             Sign up

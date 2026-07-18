@@ -6,16 +6,18 @@ import { signupWithEmail } from '@/app/auth/actions'
 interface SignupPageProps {
   searchParams: Promise<{
     error?: string
+    next?: string
   }>
 }
 
 export default async function SignupPage({ searchParams }: SignupPageProps) {
   const params = await searchParams
   const error = params.error
+  const next = params.next
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center bg-neutral-50 dark:bg-[#0a0a0a] overflow-hidden text-neutral-900 dark:text-neutral-100 font-sans px-4 py-12 transition-colors duration-150">
-
+      
       {/* Top right floating theme selector */}
       <div className="absolute top-4 right-4 z-20">
         <ThemeToggle />
@@ -23,7 +25,7 @@ export default async function SignupPage({ searchParams }: SignupPageProps) {
 
       {/* Main Registration Card */}
       <div className="relative z-10 w-full max-w-md px-6 py-8 sm:px-8 bg-white dark:bg-[#0d0d0d] border border-neutral-200 dark:border-neutral-850 rounded-xl shadow-sm flex flex-col items-center">
-
+        
         {/* Brand Logo */}
         <div className="w-10 h-10 bg-neutral-950 dark:bg-white rounded-lg flex items-center justify-center shadow-sm mb-4 select-none">
           <span className="text-lg font-bold text-white dark:text-black">▲</span>
@@ -34,7 +36,7 @@ export default async function SignupPage({ searchParams }: SignupPageProps) {
           Create your Account
         </h1>
         <p className="text-xs text-neutral-500 dark:text-neutral-400 mb-6 text-center">
-          Register a developer account to test authenticated flows.
+          Register a manual developer account to test client operations.
         </p>
 
         {/* Error Alert Box */}
@@ -52,6 +54,7 @@ export default async function SignupPage({ searchParams }: SignupPageProps) {
 
         {/* Email & Password Registration Form */}
         <form action={signupWithEmail} className="w-full space-y-4">
+          
           {/* Email input */}
           <div className="space-y-1">
             <label htmlFor="email" className="text-xs font-bold text-neutral-700 dark:text-neutral-300">
@@ -92,14 +95,14 @@ export default async function SignupPage({ searchParams }: SignupPageProps) {
         <div className="mt-6 text-center text-xs w-full pt-4 border-t border-neutral-200 dark:border-neutral-800">
           <span className="text-neutral-500 dark:text-neutral-400">Already have an account? </span>
           <Link
-            href="/auth/login"
+            href={`/auth/login${next ? `?next=${encodeURIComponent(next)}` : ''}`}
             className="font-bold text-neutral-900 hover:text-black dark:text-neutral-200 dark:hover:text-white underline transition-colors duration-150"
           >
             Log in
           </Link>
         </div>
 
-        {/* Back to home */}
+        {/* Back to guide */}
         <div className="mt-4 text-center text-xs">
           <Link
             href="/"
@@ -108,7 +111,7 @@ export default async function SignupPage({ searchParams }: SignupPageProps) {
             <svg className="w-3.5 h-3.5 transition-transform duration-150 group-hover:-translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
             </svg>
-            Back to Home
+            Back to User Setup Guide
           </Link>
         </div>
       </div>
