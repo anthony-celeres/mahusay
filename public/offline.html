@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Offline · mahusay</title>
+  <style>
+    :root { color-scheme: light dark; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: #0a0a0a;
+      color: #ededed;
+    }
+    .card {
+      max-width: 26rem;
+      text-align: center;
+    }
+    .mark {
+      width: 3rem; height: 3rem;
+      margin: 0 auto 1.25rem;
+      display: flex; align-items: center; justify-content: center;
+      background: #fff; color: #0a0a0a;
+      border-radius: 0.75rem;
+      font-size: 1.4rem; font-weight: 800;
+    }
+    h1 { font-size: 1.35rem; font-weight: 800; margin: 0 0 0.5rem; }
+    p { font-size: 0.9rem; line-height: 1.6; color: #a1a1a1; margin: 0 0 1.5rem; }
+    button {
+      font: inherit; font-weight: 700; font-size: 0.85rem;
+      padding: 0.6rem 1.25rem;
+      border: none; border-radius: 0.6rem;
+      background: #fff; color: #0a0a0a; cursor: pointer;
+    }
+    button:hover { background: #e5e5e5; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="mark">▲</div>
+    <h1>You're offline</h1>
+    <p>mahusay can't reach the network right now. Your connection may be down. Reconnect and try again — cached static assets are still available.</p>
+    <button onclick="location.reload()">Retry</button>
+  </div>
+</body>
+</html>
