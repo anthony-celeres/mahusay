@@ -13,32 +13,33 @@
 [![Supabase](https://img.shields.io/badge/Supabase-SSR-3ECF8E?logo=supabase&logoColor=white)](https://supabase.com)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
-[![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
 
-[Quick Start](#-quick-start) · [Features](#-features) · [Version Ladder](#-version-ladder) · [Full Setup](#-full-setup-guide) · [Architecture](#-security--rbac-architecture) · [Contributing](#-contributing)
+[Quick Start](#-quick-start) · [Features](#-features) · [Version Ladder](#-version-ladder) · [Full Setup](#-full-setup-guide) · [Architecture](#-security--rbac-architecture)
 
 </div>
 
 ---
 
-## What is this?
+## <img src="https://api.iconify.design/lucide/info.svg?color=%236366f1" width="20" height="20" alt=""> What is this?
 
 **mahusay** is an open-source scaffold for building full-stack web apps with **Next.js 16**, **Supabase** cookie-based auth, and **Google OAuth** — with role-based access control wired in.
 
 What makes it different: it's a **progressive ladder**. Instead of one monolithic template you have to reverse-engineer, mahusay is published as six tagged tiers — from a bare Next.js boilerplate up to full RBAC. Check out the tier that matches your needs, or walk them in order to *learn* how each layer is built. See the [Version Ladder](#-version-ladder).
 
-## ✨ Features
+## <img src="https://api.iconify.design/lucide/sparkles.svg?color=%236366f1" width="20" height="20" alt=""> Features
 
-- ⚡ **Next.js 16 App Router** — React Server Components, Server Actions, Route Handlers, React 19
-- 🔐 **Supabase Auth (SSR)** — cookie-based server-side sessions via `@supabase/ssr`
-- 🪪 **Google OAuth** — full PKCE flow with a dedicated callback handler
-- 🛡️ **Edge route protection** — `proxy.ts` (the Next.js 16 replacement for `middleware.ts`)
-- 👥 **Role-Based Access Control** — protected admin panel + Postgres Row Level Security
-- 🌗 **Adaptive theming** — dark / light / system with no hydration flash
-- 🧩 **Progressive tiers** — start from any layer via an immutable semver tag
-- 📘 **Typed & linted** — strict TypeScript, ESLint, Tailwind CSS v4
+| | |
+|---|---|
+| <img src="https://api.iconify.design/lucide/zap.svg?color=%236366f1" width="18" height="18" alt=""> **Next.js 16 App Router** | React Server Components, Server Actions, Route Handlers, React 19 |
+| <img src="https://api.iconify.design/lucide/lock.svg?color=%236366f1" width="18" height="18" alt=""> **Supabase Auth (SSR)** | Cookie-based server-side sessions via `@supabase/ssr` |
+| <img src="https://api.iconify.design/lucide/key-round.svg?color=%236366f1" width="18" height="18" alt=""> **Google OAuth** | Full PKCE flow with a dedicated callback handler |
+| <img src="https://api.iconify.design/lucide/shield.svg?color=%236366f1" width="18" height="18" alt=""> **Edge route protection** | `proxy.ts` — the Next.js 16 replacement for `middleware.ts` |
+| <img src="https://api.iconify.design/lucide/users.svg?color=%236366f1" width="18" height="18" alt=""> **Role-Based Access Control** | Protected admin panel + Postgres Row Level Security |
+| <img src="https://api.iconify.design/lucide/sun-moon.svg?color=%236366f1" width="18" height="18" alt=""> **Adaptive theming** | Dark / light / system with no hydration flash |
+| <img src="https://api.iconify.design/lucide/puzzle.svg?color=%236366f1" width="18" height="18" alt=""> **Progressive tiers** | Start from any layer via an immutable semver tag |
+| <img src="https://api.iconify.design/lucide/file-code.svg?color=%236366f1" width="18" height="18" alt=""> **Typed & linted** | Strict TypeScript, ESLint, Tailwind CSS v4 |
 
-## 🚀 Quick Start
+## <img src="https://api.iconify.design/lucide/rocket.svg?color=%236366f1" width="20" height="20" alt=""> Quick Start
 
 ```bash
 git clone https://github.com/anthony-celeres/mahusay.git
@@ -53,7 +54,7 @@ Open **[http://localhost:3000](http://localhost:3000)** — you'll land on an in
 > **Want a specific layer?** Start from any tier, e.g. `git checkout v3.0.0` for just email/password auth.
 > **Full auth** (login, OAuth, RBAC) needs Supabase configured — see the [Full Setup Guide](#-full-setup-guide).
 
-## 🪜 Version Ladder
+## <img src="https://api.iconify.design/lucide/layers.svg?color=%236366f1" width="20" height="20" alt=""> Version Ladder
 
 Each tier = the previous tier **+ exactly one capability**. Every tier is an immutable [semver](https://semver.org) tag (the **tier number is the major version**, `vN.0.0`) plus a rolling `stage/vN` branch. Fixes bump the patch (`v3.0.1`). Full details in **[VERSIONS.md](./VERSIONS.md)**.
 
@@ -66,7 +67,7 @@ Each tier = the previous tier **+ exactly one capability**. Every tier is an imm
 | [`v5.0.0`](https://github.com/anthony-celeres/mahusay/tree/v5.0.0) | Google OAuth (PKCE) | — |
 | **[`v6.0.0`](https://github.com/anthony-celeres/mahusay/tree/v6.0.0)** | **Role-Based Access Control + admin panel** *(= `main`)* | — |
 
-## 🧱 Tech Stack
+## <img src="https://api.iconify.design/lucide/boxes.svg?color=%236366f1" width="20" height="20" alt=""> Tech Stack
 
 | Layer | Choice |
 |-------|--------|
@@ -77,7 +78,7 @@ Each tier = the previous tier **+ exactly one capability**. Every tier is an imm
 | Providers | Google OAuth (PKCE) + email/password |
 | Access control | RBAC + Postgres Row Level Security (RLS) |
 
-## 📋 Full Setup Guide
+## <img src="https://api.iconify.design/lucide/clipboard-list.svg?color=%236366f1" width="20" height="20" alt=""> Full Setup Guide
 
 Get login, Google OAuth, and RBAC working end-to-end.
 
@@ -145,7 +146,7 @@ where email = 'your-user-email@example.com';
 
 </details>
 
-## 🗂️ Project Structure
+## <img src="https://api.iconify.design/lucide/folder-tree.svg?color=%236366f1" width="20" height="20" alt=""> Project Structure
 
 <details>
 <summary>Expand file tree</summary>
@@ -174,7 +175,7 @@ mahusay/
 
 </details>
 
-## 🔒 Security & RBAC Architecture
+## <img src="https://api.iconify.design/lucide/shield-check.svg?color=%236366f1" width="20" height="20" alt=""> Security & RBAC Architecture
 
 1. **Edge-level interception (`src/proxy.ts`)** — runs at the network edge on every request: transparently refreshes Supabase session cookies, blocks unauthenticated access to `/dashboard`, and denies `/dashboard/admin` unless the user's `role` metadata claim is `admin`.
 2. **Server-side cryptographic validation** — Page Server Components re-verify with `getUser()`, which (unlike `getSession()`) makes an internal request to Supabase Auth to confirm the session and claims haven't been forged:
@@ -183,16 +184,12 @@ mahusay/
    ```
 3. **RBAC metadata** — new signups default to the `user` role. A `toggleUserRole()` Server Action flips the claim so you can verify routing boundaries live. Postgres **Row Level Security** policies enforce the same role rules at the database layer.
 
-## 🤝 Contributing
-
-Contributions are welcome — bug fixes, docs, and new tiers. Because mahusay is a **stacked ladder**, there are a couple of conventions that keep it clean (immutable tags, one-feature-per-tier). Please read **[CONTRIBUTING.md](./CONTRIBUTING.md)** before opening a PR.
-
-## 📄 License
+## <img src="https://api.iconify.design/lucide/scale.svg?color=%236366f1" width="20" height="20" alt=""> License
 
 [MIT](./LICENSE) © 2026 Anthony Celeres — free to use, modify, and distribute.
 
 ---
 
 <div align="center">
-<sub>Built with Next.js 16, Supabase, and Tailwind CSS · Star ⭐ the repo if it helped you.</sub>
+<sub><img src="https://api.iconify.design/lucide/star.svg?color=%236366f1" width="12" height="12" alt=""> Built with Next.js 16, Supabase, and Tailwind CSS · Star the repo if it helped you.</sub>
 </div>
