@@ -24,7 +24,7 @@
 
 **mahusay** is an open-source scaffold for building full-stack web apps with **Next.js 16**, **Supabase** cookie-based auth, and **Google OAuth** — with role-based access control wired in.
 
-What makes it different: it's a **progressive ladder**. Instead of one monolithic template you have to reverse-engineer, mahusay is published as six tagged tiers — from a bare Next.js boilerplate up to full RBAC. Check out the tier that matches your needs, or walk them in order to *learn* how each layer is built. See the [Version Ladder](#-version-ladder).
+What makes it different: it's a **progressive ladder**. Instead of one monolithic template you have to reverse-engineer, mahusay is published as seven tagged tiers — from a bare Next.js boilerplate up to full RBAC and an installable PWA. Check out the tier that matches your needs, or walk them in order to *learn* how each layer is built. See the [Version Ladder](#-version-ladder).
 
 ## <img src="https://api.iconify.design/lucide/sparkles.svg?color=%236366f1" width="20" height="20" alt=""> Features
 
@@ -37,6 +37,7 @@ What makes it different: it's a **progressive ladder**. Instead of one monolithi
 | <img src="https://api.iconify.design/lucide/users.svg?color=%236366f1" width="18" height="18" alt=""> **Role-Based Access Control** | Protected admin panel + Postgres Row Level Security |
 | <img src="https://api.iconify.design/lucide/sun-moon.svg?color=%236366f1" width="18" height="18" alt=""> **Adaptive theming** | Dark / light / system with no hydration flash |
 | <img src="https://api.iconify.design/lucide/puzzle.svg?color=%236366f1" width="18" height="18" alt=""> **Progressive tiers** | Start from any layer via an immutable semver tag |
+| <img src="https://api.iconify.design/lucide/smartphone.svg?color=%236366f1" width="18" height="18" alt=""> **Installable PWA** | Add-to-home-screen, offline fallback, auth-aware caching |
 | <img src="https://api.iconify.design/lucide/file-code.svg?color=%236366f1" width="18" height="18" alt=""> **Typed & linted** | Strict TypeScript, ESLint, Tailwind CSS v4 |
 
 ## <img src="https://api.iconify.design/lucide/rocket.svg?color=%236366f1" width="20" height="20" alt=""> Quick Start
@@ -65,7 +66,8 @@ Each tier = the previous tier **+ exactly one capability**. Every tier is an imm
 | [`v3.0.0`](https://github.com/anthony-celeres/mahusay/tree/v3.0.0) | Supabase email &amp; password auth | `@supabase/ssr`, `@supabase/supabase-js` |
 | [`v4.0.0`](https://github.com/anthony-celeres/mahusay/tree/v4.0.0) | Edge route protection (`proxy.ts`) | — |
 | [`v5.0.0`](https://github.com/anthony-celeres/mahusay/tree/v5.0.0) | Google OAuth (PKCE) | — |
-| **[`v6.0.0`](https://github.com/anthony-celeres/mahusay/tree/v6.0.0)** | **Role-Based Access Control + admin panel** *(= `main`)* | — |
+| [`v6.0.0`](https://github.com/anthony-celeres/mahusay/tree/v6.0.0) | Role-Based Access Control + admin panel | — |
+| **[`v7.0.0`](https://github.com/anthony-celeres/mahusay/tree/v7.0.0)** | **Progressive Web App — installable + offline** *(= `main`)* | — |
 
 ## <img src="https://api.iconify.design/lucide/boxes.svg?color=%236366f1" width="20" height="20" alt=""> Tech Stack
 

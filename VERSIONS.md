@@ -21,7 +21,7 @@ git checkout stage/v3    # start working from the latest of that tier on a branc
 
 Fixes to a tier bump the **patch** version (`v3.0.1`); the `vN.0.0` snapshot never
 moves. Each tier's `package.json` version matches its tag. `main` always points at
-the newest tier (currently **v6.x**). The pre-ladder history is preserved on the
+the newest tier (currently **v7.x**). The pre-ladder history is preserved on the
 `archive/pre-scaffold` branch.
 
 ## The tiers
@@ -34,6 +34,7 @@ the newest tier (currently **v6.x**). The pre-ladder history is preserved on the
 | **4** | `v4.0.0` / `stage/v4` | **Edge route protection** via `proxy.ts` + `?next=` deep-link return flow | — |
 | **5** | `v5.0.0` / `stage/v5` | **Google OAuth** (PKCE) + `/auth/callback` route handler | — |
 | **6** | `v6.0.0` / `stage/v6` | **Role-Based Access Control**, admin panel & Row Level Security | — |
+| **7** | `v7.0.0` / `stage/v7` | **Progressive Web App** — manifest, installable, offline fallback & auth-aware service-worker caching | — |
 
 ## What each tier teaches
 
@@ -42,6 +43,7 @@ the newest tier (currently **v6.x**). The pre-ladder history is preserved on the
 - **v3 → v4** — moving protection to the edge (`proxy.ts`, the Next.js 16 replacement for `middleware.ts`) and returning users to their original destination after login.
 - **v4 → v5** — adding a social identity provider through the OAuth PKCE exchange.
 - **v5 → v6** — going from *authentication* (who you are) to *authorization* (what you may do): role claims, protected admin routes, and RLS policies in Postgres.
+- **v6 → v7** — turning the app into an installable Progressive Web App: a web manifest, a service worker with an *auth-aware* cache strategy (never caches `/dashboard` or `/auth`), and an offline fallback.
 
 ## Contributing a new tier
 
