@@ -1,8 +1,0 @@
-blank_issues_enabled: false
-contact_links:
-  - name: 🔐 Report a security vulnerability
-    url: https://github.com/anthony-celeres/mahusay/security/advisories/new
-    about: Please report security issues privately, not as public issues.
-  - name: 📖 Read the contributing guide
-    url: https://github.com/anthony-celeres/mahusay/blob/main/CONTRIBUTING.md
-    about: Conventions, the ladder model, and the PR process.
