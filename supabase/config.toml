@@ -1,0 +1,47 @@
+# Supabase CLI configuration.
+# Regenerate the full, version-matched file anytime with:  npx supabase init --force
+# The CLI fills sensible defaults for any section omitted here.
+
+project_id = "mahusay"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+shadow_port = 54320
+major_version = 15
+
+[studio]
+enabled = true
+port = 54323
+
+# Local email testing inbox (magic links, confirmations) at http://127.0.0.1:54324
+[inbucket]
+enabled = true
+port = 54324
+
+[storage]
+enabled = true
+
+[auth]
+enabled = true
+site_url = "http://127.0.0.1:3000"
+additional_redirect_urls = ["http://127.0.0.1:3000"]
+jwt_expiry = 3600
+enable_signup = true
+
+[auth.email]
+enable_signup = true
+# Disabled locally so signups don't require clicking a confirmation email.
+enable_confirmations = false
+
+# Mirror of the app's Google OAuth provider — enable and fill for local OAuth.
+[auth.external.google]
+enabled = false
+client_id = ""
+secret = ""

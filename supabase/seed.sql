@@ -1,0 +1,3 @@
+-- Seed data for local development.
+-- `supabase db reset` runs this automatically after applying all migrations.
+-- Add INSERT statements below to pre-populate tables. Empty by default.

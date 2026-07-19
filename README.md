@@ -150,6 +150,25 @@ where email = 'your-user-email@example.com';
 
 </details>
 
+<details>
+<summary><strong>Optional · Local database with the Supabase CLI</strong></summary>
+
+<br>
+
+The repo ships with the [Supabase CLI](https://supabase.com/docs/guides/cli) (a dev dependency) and a `supabase/` project directory, so you can run the whole backend locally and manage your schema as code — the `audit_logs` table + RLS policies live in a versioned migration instead of copy-pasted SQL.
+
+```bash
+npm run db:start     # start local Postgres/Auth/Studio (requires Docker)
+npm run db:reset     # apply migrations + seed to a fresh local database
+npm run db:types     # generate TypeScript types from your schema
+npm run db:diff      # diff local schema changes into a new migration
+npm run db:push      # push migrations to a linked hosted project
+```
+
+`npm run db:start` prints local API URL + anon key — drop those into `.env.local` to develop fully offline. Migrations live in `supabase/migrations/`.
+
+</details>
+
 ## <img src="https://api.iconify.design/lucide/folder-tree.svg?color=%236366f1" width="20" height="20" alt=""> Project Structure
 
 <details>
