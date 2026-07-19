@@ -1,13 +1,64 @@
-# Next.js 16 + Supabase + Google OAuth Boilerplate
+<div align="center">
 
-A production-ready, open-source project scaffold (boilerplate) for building full-stack web applications with Next.js 16 (App Router), Supabase Auth (`@supabase/ssr`), and Google OAuth authentication. Designed as a "plug-and-play" template.
+# ▲ mahusay
 
-## Version Ladder
+**A progressive, production-ready Next.js 16 scaffold — learn or launch full-stack authentication one tier at a time.**
 
-`mahusay` is a **progressive scaffold** — each tier adds one capability. Every tier is an immutable [semver](https://semver.org) tag where the **tier number is the major version** (`vN.0.0`), plus a rolling `stage/vN` branch. Fixes bump the patch (`v3.0.1`). Start from whichever layer fits your needs (`git checkout v3.0.0`). Full details in [VERSIONS.md](./VERSIONS.md).
+<sub><em>mahusay</em> — Filipino for <em>“excellent / well-made.”</em></sub>
 
-| Tier | Adds | New deps |
-|------|------|----------|
+<br>
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+[![Next.js 16](https://img.shields.io/badge/Next.js-16-black?logo=next.js&logoColor=white)](https://nextjs.org)
+[![Supabase](https://img.shields.io/badge/Supabase-SSR-3ECF8E?logo=supabase&logoColor=white)](https://supabase.com)
+[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
+
+[Quick Start](#-quick-start) · [Features](#-features) · [Version Ladder](#-version-ladder) · [Full Setup](#-full-setup-guide) · [Architecture](#-security--rbac-architecture) · [Contributing](#-contributing)
+
+</div>
+
+---
+
+## What is this?
+
+**mahusay** is an open-source scaffold for building full-stack web apps with **Next.js 16**, **Supabase** cookie-based auth, and **Google OAuth** — with role-based access control wired in.
+
+What makes it different: it's a **progressive ladder**. Instead of one monolithic template you have to reverse-engineer, mahusay is published as six tagged tiers — from a bare Next.js boilerplate up to full RBAC. Check out the tier that matches your needs, or walk them in order to *learn* how each layer is built. See the [Version Ladder](#-version-ladder).
+
+## ✨ Features
+
+- ⚡ **Next.js 16 App Router** — React Server Components, Server Actions, Route Handlers, React 19
+- 🔐 **Supabase Auth (SSR)** — cookie-based server-side sessions via `@supabase/ssr`
+- 🪪 **Google OAuth** — full PKCE flow with a dedicated callback handler
+- 🛡️ **Edge route protection** — `proxy.ts` (the Next.js 16 replacement for `middleware.ts`)
+- 👥 **Role-Based Access Control** — protected admin panel + Postgres Row Level Security
+- 🌗 **Adaptive theming** — dark / light / system with no hydration flash
+- 🧩 **Progressive tiers** — start from any layer via an immutable semver tag
+- 📘 **Typed & linted** — strict TypeScript, ESLint, Tailwind CSS v4
+
+## 🚀 Quick Start
+
+```bash
+git clone https://github.com/anthony-celeres/mahusay.git
+cd mahusay
+npm install
+cp .env.example .env.local     # then add your Supabase keys
+npm run dev
+```
+
+Open **[http://localhost:3000](http://localhost:3000)** — you'll land on an interactive setup guide.
+
+> **Want a specific layer?** Start from any tier, e.g. `git checkout v3.0.0` for just email/password auth.
+> **Full auth** (login, OAuth, RBAC) needs Supabase configured — see the [Full Setup Guide](#-full-setup-guide).
+
+## 🪜 Version Ladder
+
+Each tier = the previous tier **+ exactly one capability**. Every tier is an immutable [semver](https://semver.org) tag (the **tier number is the major version**, `vN.0.0`) plus a rolling `stage/vN` branch. Fixes bump the patch (`v3.0.1`). Full details in **[VERSIONS.md](./VERSIONS.md)**.
+
+| Tier | Adds | New dependencies |
+|------|------|------------------|
 | [`v1.0.0`](https://github.com/anthony-celeres/mahusay/tree/v1.0.0) | Next.js 16 boilerplate (App Router, TS, Tailwind v4) | `next`, `react`, `tailwindcss` |
 | [`v2.0.0`](https://github.com/anthony-celeres/mahusay/tree/v2.0.0) | Dark / light / system theming | `next-themes` |
 | [`v3.0.0`](https://github.com/anthony-celeres/mahusay/tree/v3.0.0) | Supabase email &amp; password auth | `@supabase/ssr`, `@supabase/supabase-js` |
@@ -15,115 +66,57 @@ A production-ready, open-source project scaffold (boilerplate) for building full
 | [`v5.0.0`](https://github.com/anthony-celeres/mahusay/tree/v5.0.0) | Google OAuth (PKCE) | — |
 | **[`v6.0.0`](https://github.com/anthony-celeres/mahusay/tree/v6.0.0)** | **Role-Based Access Control + admin panel** *(= `main`)* | — |
 
-## Tech Stack Overview
+## 🧱 Tech Stack
 
-- **Core Framework:** [Next.js 16](https://nextjs.org/) (App Router, React Server Components, Server Actions, Route Handlers)
-- **Language:** [TypeScript](https://www.typescriptlang.org/) (Strict type-safety)
-- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) (Premium minimalist styling, class-based theme switcher, and scroll limits)
-- **Database & Auth:** [Supabase](https://supabase.com/) via the modern `@supabase/ssr` package for cookie-based server side session persistence
-- **Authentication Provider:** Google OAuth (via PKCE flow) & standard email/password authentication
-- **Access Control:** Role-Based Access Control (RBAC) with pre-configured Admin Panel routing checks
+| Layer | Choice |
+|-------|--------|
+| Framework | [Next.js 16](https://nextjs.org/) — App Router, RSC, Server Actions |
+| Language | [TypeScript](https://www.typescriptlang.org/) (strict) |
+| Styling | [Tailwind CSS v4](https://tailwindcss.com/) with class-based theming |
+| Auth &amp; DB | [Supabase](https://supabase.com/) via `@supabase/ssr` (cookie SSR sessions) |
+| Providers | Google OAuth (PKCE) + email/password |
+| Access control | RBAC + Postgres Row Level Security (RLS) |
 
----
+## 📋 Full Setup Guide
 
-## File Structure
+Get login, Google OAuth, and RBAC working end-to-end.
 
-```text
-mahusay/
-├── .env.example              # Template for environment variables
-├── .env.local                # Local environment variables (gitignored)
-├── tsconfig.json             # TypeScript configuration
-├── package.json              # Dependencies and run scripts
-├── src/
-│   ├── proxy.ts              # Next.js 16 Request Interceptor (replaces middleware.ts)
-│   ├── app/
-│   │   ├── layout.tsx        # Global theme and provider definitions
-│   │   ├── page.tsx          # Interactive setup developer guide (landing page)
-│   │   ├── globals.css       # Tailwind CSS v4 directives
-│   │   ├── dashboard/
-│   │   │   ├── page.tsx      # Secure dashboard with role checking and role-switch test widget
-│   │   │   └── admin/
-│   │   │       └── page.tsx  # Protected admin dashboard containing logs and audit stats
-│   │   └── auth/
-│   │       ├── callback/
-│   │       │   └── route.ts  # PKCE auth code exchange Route Handler
-│   │       ├── signup/
-│   │       │   └── page.tsx  # Account Registration Page
-│   │       ├── login/
-│   │       │   └── page.tsx  # Auth Portal Login screen
-│   │       └── actions.ts    # Secure Server Actions for OAuth, Login, Signup & Sign Out
-│   ├── components/
-│   │   ├── theme-provider.tsx# Theme context wrapper using next-themes
-│   │   ├── theme-toggle.tsx  # Minimalist light/dark/system theme selector
-│   │   ├── submit-btn.tsx    # React 19 useFormStatus Submit button
-│   │   ├── login-btn.tsx     # Google Sign-in button with loading state
-│   │   └── logout-btn.tsx    # Sign-out action button
-│   └── utils/
-│       └── supabase/
-│           ├── client.ts     # Supabase Browser Client constructor
-│           └── server.ts     # Supabase Server Client constructor (asynchronous cookies)
-```
+<details>
+<summary><strong>Step 1 · Supabase project</strong> — get your URL &amp; anon key</summary>
 
----
+<br>
 
-## Getting Started
+1. Go to the [Supabase Dashboard](https://supabase.com/dashboard) → **New Project**.
+2. Set a **Name**, a strong **Database Password**, and the **Region** closest to your users. Wait ~1–2 min for provisioning.
+3. Open **Project Settings → API** and copy the **Project URL** and **anon / public key**.
 
-Follow these step-by-step instructions to get the boilerplate running locally with Supabase and Google OAuth:
+</details>
 
-### Step 1: Clone the Repository and Install Dependencies
+<details>
+<summary><strong>Step 2 · Google OAuth</strong> — create credentials (optional, for social login)</summary>
 
-```bash
-git clone <your-scaffold-repo-url> mahusay
-cd mahusay
-npm install
-```
+<br>
 
-### Step 2: Set up Supabase Project
-
-1. Go to the [Supabase Dashboard](https://supabase.com/dashboard) and log in.
-2. Click **New Project**, select an organization, and fill out:
-   - **Project Name:** (e.g., `mahusay-scaffold`)
-   - **Database Password:** (Generate a secure password and save it)
-   - **Region:** (Select the closest region to your users)
-3. Click **Create new project** and wait for it to provision (takes about 1-2 minutes).
-4. Go to **Project Settings > API** on the left menu.
-5. Copy your **Project URL** and **API Key (anon/public)**.
-
-### Step 3: Configure Google OAuth on Google Cloud Console
-
-1. Navigate to the [Google Cloud Console](https://console.cloud.google.com).
-2. Create a **New Project** or select an existing one.
-3. Search for **OAuth consent screen** in the search bar:
-   - Select **External** and click **Create**.
-   - Fill in the required fields. Click **Save and Continue**.
-   - Under **Scopes**, click **Add or Remove Scopes**, select `.../auth/userinfo.email` and `.../auth/userinfo.profile`, then click **Save and Continue**.
-4. Search for **Credentials** in the left menu:
-   - Click **Create Credentials > OAuth client ID**.
-   - Set **Application type** to **Web application**.
-   - Under **Authorized redirect URIs**, add the callback URL provided by your Supabase project:
-     ```text
-     https://<your-supabase-project-ref>.supabase.co/auth/v1/callback
-     ```
-     *(Replace `<your-supabase-project-ref>` with the reference ID of your project).*
-   - Click **Create**.
+1. In the [Google Cloud Console](https://console.cloud.google.com), create/select a project.
+2. **OAuth consent screen** → **External** → fill required fields → add scopes `.../auth/userinfo.email` and `.../auth/userinfo.profile`.
+3. **Credentials** → **Create Credentials → OAuth client ID** → **Web application**.
+4. Under **Authorized redirect URIs**, add your Supabase callback:
+   ```text
+   https://<your-supabase-project-ref>.supabase.co/auth/v1/callback
+   ```
 5. Copy the generated **Client ID** and **Client Secret**.
+6. Back in **Supabase → Authentication → Providers → Google**, enable it and paste the Client ID + Secret.
 
-### Step 4: Configure Google Provider in Supabase
+</details>
 
-1. Back in the **Supabase Dashboard**, navigate to **Authentication > Providers > Google**.
-2. Toggle **Enable Google Enabled** to `ON`.
-3. Paste the **Client ID** and **Client Secret** you copied from the Google Cloud Console.
-4. Click **Save**.
+<details>
+<summary><strong>Step 3 · Environment variables</strong></summary>
 
-### Step 5: Configure Environment Variables
-
-In the root of your project directory, copy `.env.example` to create `.env.local`:
+<br>
 
 ```bash
 cp .env.example .env.local
 ```
-
-Open `.env.local` and fill in the values:
 
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://<your-supabase-ref>.supabase.co
@@ -131,32 +124,75 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=<your-supabase-anon-key>
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
 
-### Step 6: Start Local Development Server
+</details>
 
-Run the development server locally:
+<details>
+<summary><strong>Step 4 · Run &amp; make yourself an admin</strong></summary>
+
+<br>
 
 ```bash
 npm run dev
 ```
 
-Navigate to [http://localhost:3000](http://localhost:3000) in your browser. You will see the interactive Developer Guide. Click the **Login** button in the header to test your setup!
+Register an account, then either use the **“Promote Role to admin”** button on the dashboard (fastest for local testing), or run in the **Supabase SQL Editor**:
+
+```sql
+update auth.users
+set raw_user_meta_data = raw_user_meta_data || '{"role": "admin"}'::jsonb
+where email = 'your-user-email@example.com';
+```
+
+</details>
+
+## 🗂️ Project Structure
+
+<details>
+<summary>Expand file tree</summary>
+
+```text
+mahusay/
+├── .env.example              # Template for environment variables
+├── package.json              # Dependencies and run scripts
+├── src/
+│   ├── proxy.ts              # Next.js 16 request interceptor (replaces middleware.ts)
+│   ├── app/
+│   │   ├── layout.tsx        # Root layout + theme provider
+│   │   ├── page.tsx          # Interactive setup guide (landing page)
+│   │   ├── globals.css       # Tailwind CSS v4 directives
+│   │   ├── dashboard/
+│   │   │   ├── page.tsx      # Secure dashboard + role-switch test widget
+│   │   │   └── admin/page.tsx# Protected admin panel (audit logs, RLS)
+│   │   └── auth/
+│   │       ├── callback/route.ts  # PKCE code → session exchange
+│   │       ├── login/page.tsx     # Login screen
+│   │       ├── signup/page.tsx     # Registration screen
+│   │       └── actions.ts          # Server Actions: login, signup, OAuth, signout
+│   ├── components/           # theme toggle, submit/login/logout buttons
+│   └── utils/supabase/       # browser + server Supabase clients
+```
+
+</details>
+
+## 🔒 Security & RBAC Architecture
+
+1. **Edge-level interception (`src/proxy.ts`)** — runs at the network edge on every request: transparently refreshes Supabase session cookies, blocks unauthenticated access to `/dashboard`, and denies `/dashboard/admin` unless the user's `role` metadata claim is `admin`.
+2. **Server-side cryptographic validation** — Page Server Components re-verify with `getUser()`, which (unlike `getSession()`) makes an internal request to Supabase Auth to confirm the session and claims haven't been forged:
+   ```typescript
+   const { data: { user } } = await supabase.auth.getUser()
+   ```
+3. **RBAC metadata** — new signups default to the `user` role. A `toggleUserRole()` Server Action flips the claim so you can verify routing boundaries live. Postgres **Row Level Security** policies enforce the same role rules at the database layer.
+
+## 🤝 Contributing
+
+Contributions are welcome — bug fixes, docs, and new tiers. Because mahusay is a **stacked ladder**, there are a couple of conventions that keep it clean (immutable tags, one-feature-per-tier). Please read **[CONTRIBUTING.md](./CONTRIBUTING.md)** before opening a PR.
+
+## 📄 License
+
+[MIT](./LICENSE) © 2026 Anthony Celeres — free to use, modify, and distribute.
 
 ---
 
-## Security & RBAC Architecture
-
-1. **Edge-Level Interception (`src/proxy.ts`):** 
-   Next.js 16 introduces `proxy.ts` to replace the deprecated `middleware.ts`. This request interceptor runs at the network edge:
-   - refreshes cookies transparently via `@supabase/ssr`'s `getAll` and `setAll` API.
-   - Enforces authentication: blocks unauthenticated requests to `/dashboard`.
-   - **Enforces Role-Based Access Control (RBAC):** blocks access to `/dashboard/admin` and sub-paths if the user's role metadata claims are not `'admin'`.
-
-2. **Server-Side Cryptographic Validation:**
-   For secure data fetching, Page Server Components perform secondary validation checks:
-   ```typescript
-   const { data: { user }, error } = await supabase.auth.getUser()
-   ```
-   Unlike `getSession()`, `getUser()` makes an internal network request to the Supabase authentication provider to cryptographically verify that the user session and metadata claims have not been altered or forged.
-
-3. **RBAC Metadata Toggling:**
-   During signup, new registrations default to the `'user'` role inside `user_metadata`. The template includes a role-switching Server Action `toggleUserRole()` allowing developers to swap roles dynamically inside their user workspace dashboard to verify routing limits in action.
+<div align="center">
+<sub>Built with Next.js 16, Supabase, and Tailwind CSS · Star ⭐ the repo if it helped you.</sub>
+</div>
